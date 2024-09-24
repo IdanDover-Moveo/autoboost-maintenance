@@ -16,11 +16,13 @@ export class FreeSubscribersController {
     @Query('integration') integrationName: string,
     @Body() body: any,
   ) {
-    console.log(user);
-    console.log(body);
-    console.log(type);
-    console.log(integrationName);
+    const data = this.freeSubs.handleIntegration(
+      user,
+      type,
+      integrationName,
+      body,
+    );
 
-    return 'moshe';
+    return data;
   }
 }
