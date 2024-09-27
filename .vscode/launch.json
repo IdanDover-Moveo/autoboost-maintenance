@@ -2,21 +2,21 @@
   "version": "0.1.0",
   "configurations": [
     {
-      "command": "npm run dev",
+      "command": "npm run debug",
       "name": "Run Server",
       "request": "launch",
       "type": "node-terminal"
-    },
-    {
-      "name": "Monday Code Server",
-      "type": "node",
-      "request": "launch",
-      "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/ts-node",
-      "args": ["${workspaceFolder}/src/main.ts"],
-      "cwd": "${workspaceFolder}",
-      "console": "integratedTerminal",
-      "sourceMaps": true,
-      "internalConsoleOptions": "neverOpen"
     }
+    // {
+    //   "name": "Monday Code Server",
+    //   "type": "node",
+    //   "request": "launch",
+    //   "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/ts-node",
+    //   "args": ["${workspaceFolder}/src/main.ts"],
+    //   "cwd": "${workspaceFolder}",
+    //   "console": "integratedTerminal",
+    //   "sourceMaps": true,
+    //   "internalConsoleOptions": "neverOpen"
+    // }
   ]
 }

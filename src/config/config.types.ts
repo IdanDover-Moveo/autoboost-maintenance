@@ -22,4 +22,5 @@ export interface EnvVariables {
   CLIENT_SECRET: string;
   SIGNING_SECRET: string;
   REDIRECT_URI: string;
+  MONGO_URL: string;
 }
