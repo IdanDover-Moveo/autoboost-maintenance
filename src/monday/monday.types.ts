@@ -7,6 +7,7 @@ export interface GraphQlBody {
 }
 
 export interface UseApiOptions {
-  user: UserData;
+  userId: number;
+  accountId: number;
   accessToken?: string;
 }

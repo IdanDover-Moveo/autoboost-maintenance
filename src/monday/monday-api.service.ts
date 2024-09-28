@@ -17,10 +17,10 @@ export class MondayApiService {
   async execute(
     query: string,
     variables: QueryVariables | undefined,
-    { user, accessToken }: UseApiOptions,
+    { userId, accountId, accessToken }: UseApiOptions,
   ) {
     if (!accessToken) {
-      accessToken = await this._getAccessToken(user);
+      accessToken = await this._getAccessToken(accountId, userId);
     }
 
     const mondayApi = new ApiClient(accessToken);
@@ -28,7 +28,7 @@ export class MondayApiService {
     try {
       const data = await mondayApi.query(query, variables);
       this.mLogger.info(
-        `Request successfully sent to monday | query: ${query} | variables: ${variables ? JSON.stringify(variables) : 'NONE'} | by user: ${user.user_id}`,
+        `Request successfully sent to monday | query: ${query} | variables: ${variables ? JSON.stringify(variables) : 'NONE'} | by user: ${userId}`,
       );
       return data;
     } catch (err) {
@@ -40,9 +40,12 @@ export class MondayApiService {
     }
   }
 
-  private async _getAccessToken(user: UserData): Promise<string> {
+  private async _getAccessToken(
+    accountId: number,
+    userId: number,
+  ): Promise<string> {
     const accountData = await this.mSecureStorage.get<SecureStorageAccountData>(
-      `${user.account_id}`,
+      `${accountId}`,
     );
 
     if (!accountData) {
@@ -53,7 +56,7 @@ export class MondayApiService {
       );
     }
 
-    const userData = accountData[user.user_id];
+    const userData = accountData[userId];
     if (!userData) {
       throw new AppException(
         'You do not have an access token for this app, please go threw the oauth process to continue',

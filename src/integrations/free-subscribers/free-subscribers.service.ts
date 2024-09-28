@@ -1,34 +1,33 @@
 import { IntegrationData } from 'src/auth/auth.types';
-import { FreeSubscribersActionHandler } from './free-subscribers-action.handler';
-import { ActionBlockNames, ActionBlockQuery } from './free-subscribers.types';
+import { FreeSubscribersActionHandlerService } from './free-subscribers-action-handler.service';
+import { ActionBlockQuery } from './free-subscribers.types';
 import { AppException } from 'src/exceptions/app.exception';
 import { ActionBody } from '../types/action.types';
 import { HttpStatus, Injectable } from '@nestjs/common';
-import { InputFields } from '../types/input-fields.types';
+import { StringsUtilsService } from 'src/utils/strings/strings.service';
 
 @Injectable()
 export class FreeSubscribersService {
-  private actionBlockMap: Map<ActionBlockQuery, ActionBlockNames>;
   constructor(
-    private readonly freeSubsActionHandler: FreeSubscribersActionHandler,
-  ) {
-    this.actionBlockMap = new Map<ActionBlockQuery, ActionBlockNames>([
-      ['add-free-subscriber', 'addFreeSubscriber'],
-      ['remove-free-subscriber', 'removeFreeSubscriber'],
-    ]);
-  }
+    private readonly freeSubsActionHandler: FreeSubscribersActionHandlerService,
+    private readonly stringUtils: StringsUtilsService,
+  ) {}
   handelAction(
     user: IntegrationData,
     block: ActionBlockQuery,
     body: ActionBody,
   ) {
-    const blockName = this.actionBlockMap.get(block);
-    if (!blockName) {
-      throw new AppException('Invalid block name', HttpStatus.BAD_REQUEST);
+    const action = this.stringUtils.convertKebabCaseToCamelCase(block);
+    if (
+      !(action in this.freeSubsActionHandler) ||
+      typeof this.freeSubsActionHandler[action] !== 'function'
+    ) {
+      throw new AppException(
+        'Invalid block name',
+        HttpStatus.UNPROCESSABLE_ENTITY,
+      );
     }
-    return this.freeSubsActionHandler[blockName](
-      user,
-      body.payload.inputFields as any,
-    );
+
+    return this.freeSubsActionHandler[action](user, body.payload.inputFields);
   }
 }

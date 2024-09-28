@@ -2,11 +2,13 @@ import { MondayAccountFreeSubscriptionModule } from 'src/monday-account-free-sub
 import { Module } from '@nestjs/common';
 import { FreeSubscribersController } from './free-subscribers.controller';
 import { FreeSubscribersService } from './free-subscribers.service';
-import { FreeSubscribersActionHandler } from './free-subscribers-action.handler';
+import { FreeSubscribersActionHandlerService } from './free-subscribers-action-handler.service';
+import { StringsModule } from 'src/utils/strings/strings.module';
+import { MondayModule } from 'src/monday/monday.module';
 
 @Module({
-  imports: [MondayAccountFreeSubscriptionModule],
+  imports: [MondayAccountFreeSubscriptionModule, StringsModule, MondayModule],
   controllers: [FreeSubscribersController],
-  providers: [FreeSubscribersService, FreeSubscribersActionHandler],
+  providers: [FreeSubscribersService, FreeSubscribersActionHandlerService],
 })
 export class FreeSubscribersModule {}

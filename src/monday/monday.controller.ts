@@ -16,7 +16,8 @@ export class MondayController {
     @CurrentUser() user: UserData,
   ): Promise<DataResponse<unknown>> {
     const data = await this.mondayApi.execute(body.query, body.variables, {
-      user,
+      userId: user.user_id,
+      accountId: user.account_id,
     });
 
     return { data };
