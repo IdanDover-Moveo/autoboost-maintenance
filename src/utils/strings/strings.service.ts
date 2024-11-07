@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class StringsUtilsService {
-  convertKebabCaseToCamelCase(kebabCase: string): string {
+  convertKebabToCamel(kebabCase: string): string {
     return kebabCase
       .split('-')
       .map((word, index) => {

@@ -17,15 +17,12 @@ export class FreeSubscribersService {
     block: ActionBlockQuery,
     body: ActionBody,
   ) {
-    const action = this.stringUtils.convertKebabCaseToCamelCase(block);
+    const action = this.stringUtils.convertKebabToCamel(block);
     if (
       !(action in this.freeSubsActionHandler) ||
       typeof this.freeSubsActionHandler[action] !== 'function'
     ) {
-      throw new AppException(
-        'Invalid block name',
-        HttpStatus.UNPROCESSABLE_ENTITY,
-      );
+      throw new AppException('Invalid block name', HttpStatus.OK);
     }
 
     return this.freeSubsActionHandler[action](user, body.payload.inputFields);

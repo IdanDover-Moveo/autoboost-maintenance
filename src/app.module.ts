@@ -11,6 +11,7 @@ import { AppEventsModule } from './app-events/app-events.module';
 import { IntegrationsModule } from './integrations/integrations.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { MondayAccountFreeSubscriptionModule } from './schemas/monday-account-free-subscription/monday-account-free-subscription.module';
+import { NewMondayAccountActionsModule } from './schemas/new-monday-account-actions/new-monday-account-actions.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { MondayAccountFreeSubscriptionModule } from './schemas/monday-account-fr
       }),
     }),
     MondayAccountFreeSubscriptionModule,
+    NewMondayAccountActionsModule,
   ],
   controllers: [AppController],
   providers: [

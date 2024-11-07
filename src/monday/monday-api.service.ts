@@ -14,7 +14,7 @@ export class MondayApiService {
     private readonly mLogger: MondayLoggerService,
   ) {}
 
-  async execute(
+  async execute<T>(
     query: string,
     variables: QueryVariables | undefined,
     { userId, accountId, accessToken }: UseApiOptions,
@@ -26,7 +26,7 @@ export class MondayApiService {
     const mondayApi = new ApiClient(accessToken);
 
     try {
-      const data = await mondayApi.query(query, variables);
+      const data = await mondayApi.query<T>(query, variables);
       this.mLogger.info(
         `Request successfully sent to monday | query: ${query} | variables: ${variables ? JSON.stringify(variables) : 'NONE'} | by user: ${userId}`,
       );
