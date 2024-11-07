@@ -4,7 +4,7 @@ import { MondayAccountFreeSubscriptionService } from './monday-account-free-subs
 import {
   MondayAccountFreeSubscription,
   MondayAccountFreeSubscriptionSchema,
-} from 'src/schemas/monday-account-free-subscription.schema';
+} from './monday-account-free-subscription.schema';
 
 @Module({
   imports: [

@@ -10,7 +10,7 @@ import { AppExceptionFilter } from './filters/app-exception.filter';
 import { AppEventsModule } from './app-events/app-events.module';
 import { IntegrationsModule } from './integrations/integrations.module';
 import { MongooseModule } from '@nestjs/mongoose';
-import { MondayAccountFreeSubscriptionModule } from './monday-account-free-subscription/monday-account-free-subscription.module';
+import { MondayAccountFreeSubscriptionModule } from './schemas/monday-account-free-subscription/monday-account-free-subscription.module';
 
 @Module({
   imports: [

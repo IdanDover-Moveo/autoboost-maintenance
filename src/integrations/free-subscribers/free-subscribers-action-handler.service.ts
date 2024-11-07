@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { IntegrationData } from 'src/auth/auth.types';
-import { MondayAccountFreeSubscriptionService } from 'src/monday-account-free-subscription/monday-account-free-subscription.service';
 import { InputFields } from '../types/input-fields.types';
 import { MondayApiService } from 'src/monday/monday-api.service';
+import { MondayAccountFreeSubscriptionService } from 'src/schemas/monday-account-free-subscription/monday-account-free-subscription.service';
 
 @Injectable()
 export class FreeSubscribersActionHandlerService {
