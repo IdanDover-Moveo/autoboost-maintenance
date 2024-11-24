@@ -36,6 +36,7 @@
     "cross-env": "^7.0.3",
     "cross-port-killer": "^1.4.0",
     "helmet": "^7.1.0",
+    "mongodbautoip": "^1.0.4",
     "mongoose": "^8.6.3",
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",

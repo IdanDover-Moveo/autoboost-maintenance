@@ -9,9 +9,9 @@ import { SessionLoggingInterceptor } from './interceptors/session-logging.interc
 import { AppExceptionFilter } from './filters/app-exception.filter';
 import { AppEventsModule } from './app-events/app-events.module';
 import { IntegrationsModule } from './integrations/integrations.module';
-import { MongooseModule } from '@nestjs/mongoose';
 import { MondayAccountFreeSubscriptionModule } from './schemas/monday-account-free-subscription/monday-account-free-subscription.module';
 import { NewMondayAccountActionsModule } from './schemas/new-monday-account-actions/new-monday-account-actions.module';
+import { DatabaseModule } from './config/database.module';
 
 @Module({
   imports: [
@@ -23,13 +23,7 @@ import { NewMondayAccountActionsModule } from './schemas/new-monday-account-acti
     AuthModule,
     AppEventsModule,
     IntegrationsModule,
-    MongooseModule.forRootAsync({
-      imports: [ConfigModule],
-      inject: [ConfigService],
-      useFactory: async (configService: ConfigService) => ({
-        uri: configService.get<string>('MONGO_URL'),
-      }),
-    }),
+    DatabaseModule.forRootAsync(),
     MondayAccountFreeSubscriptionModule,
     NewMondayAccountActionsModule,
   ],
